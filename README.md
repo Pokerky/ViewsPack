@@ -34,7 +34,7 @@ The **Width** and **Height** have to be assigned to a specified value, then you 
   |Property|Property Type|Description|
   |:---|:---|:---|
   |**Items**|DependencyProperty|specify items to scroll|
-  |**Orientation**|Property|define the scroll orientation|
+  |**Orientation**|Property|define the scroll orientation(horizontal or vertical)|
   |**ScrollBehaviour**|Property|define whether scroll backward or scroll forward|
   |**ScrollDurationSec**|Property|how long(in seconds) the scroll animation take|
   |**ScrollIntervalSec**|Property|how long(in seconds) the current item keep|
