@@ -30,10 +30,10 @@ xmlns:vp="clr-namespace:ViewsPack;assembly=ViewsPack"
 </YourView>
 ```
 
-The **Width** and **Height** have to be assigned to a specified value, then you can control this view with some property:
-  **Items**(DependencyProperty): specify items to scroll
-  **Orientation**(property): define the scroll orientation
-  **ScrollBehaviour**(property): define whether scroll backward or scroll forward
-  **ScrollDurationSec**(property): how long(in seconds) the scroll animation take
+The **Width** and **Height** have to be assigned to a specified value, then you can control this view with some property:<br>
+  **Items**(DependencyProperty): specify items to scroll<br>
+  **Orientation**(property): define the scroll orientation<br>
+  **ScrollBehaviour**(property): define whether scroll backward or scroll forward<br>
+  **ScrollDurationSec**(property): how long(in seconds) the scroll animation take<br>
   **ScrollIntervalSec**(property): how long(in seconds) the current item keep
   
