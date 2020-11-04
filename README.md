@@ -2,7 +2,7 @@
 This project contains some interesting views for WPF .Net Core
 
 ## AutoScrollableView
-This view can auto scroll specified items automatically
+This view can scroll items automatically
 
 ```
 <YourView
