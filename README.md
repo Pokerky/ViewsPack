@@ -32,6 +32,7 @@ xmlns:vp="clr-namespace:ViewsPack;assembly=ViewsPack"
 
 The **Width** and **Height** have to be assigned to a specified value, then you can control this view with follow property:<br>
   |property|property type|description|
+  |:---|:---|:---|
   |**Items**|DependencyProperty|specify items to scroll|
   |**Orientation**|Property|define the scroll orientation|
   |**ScrollBehaviour**|Property|define whether scroll backward or scroll forward|
