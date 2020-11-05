@@ -21,15 +21,14 @@
     </Window.Resources>
 
     <Grid>
-        <Border Width="402" Height="242" Grid.Row="1" BorderThickness="2" BorderBrush="#DDFFFFFF" CornerRadius="3">
+        <Border Grid.Row="1" BorderThickness="2" BorderBrush="#DDFFFFFF" CornerRadius="3" Padding="5">
             <vp:AutoScrollableView         
                 Items="{x:Static local:DataItem.DataItems}"
                 x:Name="scrollableView"
                 ScrollBehaviour="Backward"
                 ScrollDurationSec="0.4"
                 ScrollIntervalSec="5"
-                Orientation="Horizontal" 
-                Width="400" Height="240"/>
+                Orientation="Horizontal"/>
         </Border>
     </Grid>
 </Window>

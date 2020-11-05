@@ -109,20 +109,14 @@ namespace ViewsPack
 				itemsExpand.Add(items.First());
 
 				itemsHost.ItemsSource = itemsExpand;
-				_currentIndex = 1;
 			}
 			else
 			{
 				itemsHost.ItemsSource = null;
-				_currentIndex = 0;
 			}
 
 			// reset status when items changed
-			_isScrolling = false;
-			Offset = OffsetStep * _currentIndex;
-
-			// there is a expanded item, so we need minus one
-			overallBar.SelectedIndex = _currentIndex - 1;
+			Reset();
 		}
 
 		#endregion
@@ -165,8 +159,8 @@ namespace ViewsPack
 		{
 			get
 			{
-				if (Orientation == Orientation.Horizontal) { return Width; }
-				else { return Height; }
+				if (Orientation == Orientation.Horizontal) { return ActualWidth; }
+				else { return ActualHeight; }
 			}
 		}
 
@@ -320,22 +314,22 @@ namespace ViewsPack
 
 		private Thickness RightHideMargin
 		{
-			get { return new Thickness(Width, 0, 0, 0); }
+			get { return new Thickness(ActualWidth, 0, 0, 0); }
 		}
 
 		private Thickness RightShowMargin
 		{
-			get { return new Thickness(Width - rightCtrlBtn.Width, 0, 0, 0); }
+			get { return new Thickness(ActualWidth - rightCtrlBtn.Width, 0, 0, 0); }
 		}
 
 		private Thickness BottomHideMargin
 		{
-			get { return new Thickness(0, Height, 0, 0); }
+			get { return new Thickness(0, ActualHeight, 0, 0); }
 		}
 
 		private Thickness BottomShowMargin
 		{
-			get { return new Thickness(0, Height - bottomCtrlBtn.Height, 0, 0); }
+			get { return new Thickness(0, ActualHeight - bottomCtrlBtn.Height, 0, 0); }
 		}
 
 		/// <summary>
@@ -345,6 +339,12 @@ namespace ViewsPack
 		{
 			if (leftCtrlBtn == null || topCtrlBtn == null || rightCtrlBtn == null || bottomCtrlBtn == null) { return; }
 
+			// remove effection of animation
+			leftCtrlBtn.BeginAnimation(MarginProperty, null);
+			topCtrlBtn.BeginAnimation(MarginProperty, null);
+			rightCtrlBtn.BeginAnimation(MarginProperty, null);
+			bottomCtrlBtn.BeginAnimation(MarginProperty, null);
+			// re-set margin of button
 			leftCtrlBtn.Margin = LeftHideMargin;
 			topCtrlBtn.Margin = TopHideMargin;
 			rightCtrlBtn.Margin = RightHideMargin;
@@ -485,19 +485,21 @@ namespace ViewsPack
 		#endregion
 
 		#region event handler for user-control
+
 		/// <summary>
-		/// re-calculate  offset, re-hide control buttons when Height or Width changed,
+		/// re-calculate  offset, re-hide control buttons when ActualHeight or ActualWidth changed,
 		/// stop or start dispatcher timer when IsMouseOver changed
 		/// </summary>
 		/// <param name="e"></param>
 		protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
 		{
-			if (e.Property == UserControl.HeightProperty
-				|| e.Property == UserControl.WidthProperty)
+			if (e.Property == UserControl.ActualHeightProperty
+				|| e.Property == UserControl.ActualWidthProperty)
 			{
-				// re-calculate Offset when height or width changed
-				Offset = OffsetStep * _currentIndex;
-				// re-hide control buttons
+				// re-set status when ActualHeight or ActualWidth changed
+				// TODO: a better handle for ActualWidth and ActualHeight changed when scroll animation is runing
+				Reset();
+				// re-hide control buttons when ActualHeight or ActualWidth changed
 				HideControlButtons();
 			}
 
@@ -568,6 +570,29 @@ namespace ViewsPack
 			_scrollTimer.Interval = TimeSpan.FromSeconds(ScrollIntervalSec);
 			_scrollTimer.Tick += ScrollTimer_Tick;
 			_scrollTimer.Start();
+		}
+
+		/// <summary>
+		/// reset scrolling status
+		/// </summary>
+		private void Reset()
+		{
+			object[] items = Items;
+			if (items == null || items.Length == 0)
+			{
+				_currentIndex = 0;
+			}
+			else
+			{
+				_currentIndex = 1;
+			}
+
+			_isScrolling = false;
+			// remove effection of animation
+			this.BeginAnimation(OffsetProperty, null);
+			Offset = OffsetStep * _currentIndex;
+			// there is a expanded item, so we need minus one
+			overallBar.SelectedIndex = _currentIndex - 1;
 		}
 
 		#endregion
