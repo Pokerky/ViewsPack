@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:ViewsPack"
              mc:Ignorable="d" 
              Loaded="UserControl_Loaded"
+             x:Name="mainView"
              d:DesignHeight="260"  d:DesignWidth="400">
 
     <UserControl.Resources>
@@ -110,15 +111,15 @@
         <ScrollViewer
             x:Name="scrollViewer"
             PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
-            Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoScrollableView}}, Path=ActualWidth}"
-            Height="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoScrollableView}}, Path=ActualHeight}"         
+            Width="{Binding ElementName=mainView, Path=ActualWidth}"
+            Height="{Binding ElementName=mainView, Path=ActualHeight}"         
             ScrollViewer.VerticalScrollBarVisibility="Hidden"
             ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ItemsControl x:Name="itemsHost" ItemTemplate="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoScrollableView}}, Path=ItemTemplate}">
                 <ItemsControl.ItemContainerStyle>
                     <Style>
-                        <Setter Property="Control.Width" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoScrollableView}}, Path=ActualWidth}"/>
-                        <Setter Property="Control.Height" Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:AutoScrollableView}}, Path=ActualHeight}"/>
+                        <Setter Property="Control.Width" Value="{Binding ElementName=mainView, Path=ActualWidth}"/>
+                        <Setter Property="Control.Height" Value="{Binding ElementName=mainView, Path=ActualHeight}"/>
                         <Setter Property="Control.HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="Control.VerticalContentAlignment" Value="Center"/>
                         <Setter Property="Control.Opacity" Value="0.8"/>
