@@ -13,7 +13,7 @@
         MouseDoubleClick="Window_MouseDoubleClick"
         Title="MainWindow" Height="260" Width="420">
     <Window.Resources>
-        <DataTemplate DataType="{x:Type local:DataItem}">
+        <DataTemplate DataType="{x:Type local:DataItem}" x:Key="dataItemTemplate">
             <Grid Opacity="0.8">
                 <Rectangle Fill="{Binding Path=Color}"/>
             </Grid>
@@ -24,6 +24,7 @@
         <Border Grid.Row="1" BorderThickness="2" BorderBrush="#DDFFFFFF" CornerRadius="3" Padding="5">
             <vp:AutoScrollableView         
                 Items="{x:Static local:DataItem.DataItems}"
+                ItemTemplate="{StaticResource dataItemTemplate}"
                 x:Name="scrollableView"
                 ScrollBehaviour="Backward"
                 ScrollDurationSec="0.4"
